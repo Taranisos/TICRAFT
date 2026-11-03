@@ -9,3 +9,9 @@ color, 4x4 and 8x8
 8x8 dirt and grass are from https://www.planetminecraft.com/texture-pack/8x8-grass-amp-dirt/
 the rest is from f8thful: https://ewanhowell.com/resourcepacks/f8thful/
 4x4 textures from me
+
+Know issues:
+At 20 blocks from the right world border, at the barrier between chunks 0 and 1, blocks can get deleted and won't render correctly.
+It's slow.
+There is an edge right and on the top of the screen where no blocks will come.
+The
