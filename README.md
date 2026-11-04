@@ -1,17 +1,15 @@
 # TICRAFT
 Minecraft for the TI 84 Evo.
 Features:
-10 Different blocks: air, grass, stone, oak_log, oak_planks, oak_leaves, sand, glass, water
+10 Different blocks: air, grass, stone, oak_log, oak_planks, oak_leaves, sand, glass, water.
 The world is a 2D side-view 999 blocks wide and a height of 8 blocks.
 
 Graphics modes:
-color, 4x4 and 8x8
-8x8 dirt and grass are from https://www.planetminecraft.com/texture-pack/8x8-grass-amp-dirt/
-the rest is from f8thful: https://ewanhowell.com/resourcepacks/f8thful/
-4x4 textures from me
+16x16
+Textures from Minecraft.
 
 Know issues:
 At 20 blocks from the right world border, at the barrier between chunks 0 and 1, blocks can get deleted and won't render correctly.
 It's slow.
-There is an edge right and on the top of the screen where no blocks will come.
-The
+
+Have fun!
