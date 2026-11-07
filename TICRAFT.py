@@ -69,12 +69,11 @@ def v(player_x=b):
 	C=player_x;H=c(j);L=D;I=D;F=D;B=[]
 	if C==b:C=H[0]
 	B.append(C);A=f.floor((C+499)/20)
-	if abs(C+401)>5:
-		if C-(A*20-499)<10 or A==49:F=E
-		M=f.floor(A/5);J=k;J+=U(M);B.append(A);H=c(J);N=W(A)
-		if not F:I=E
-		if I:B.append(A+1);K=W(A+1)
-		elif F:B.append(A-1);K=W(A-1)
+	if C-(A*20-499)<10 or A==49:F=E
+	M=f.floor(A/5);J=k;J+=U(M);B.append(A);H=c(J);N=W(A)
+	if not F:I=E
+	if I:B.append(A+1);K=W(A+1)
+	elif F:B.append(A-1);K=W(A-1)
 	if L:G('Console: Info: world loaded succesfully!');e.sleep(3)
 	B.append(N);B.append(K);return B
 def AT(start,world,end):
@@ -192,8 +191,8 @@ def AF(world,dir):
 		elif A==0 or A==N:C=3;L=E;K=4
 		else:
 			A=P+499+O-B[2]*20;C=4
-			if M<A:C=3;L=E;K=4;A=0
-			elif A==0 or A==M:L=E;K=3
+			if A==0 or A==M:L=E;K=3
+			elif M<A:C=3;L=E;K=4;A=0
 		for H in B[C][A]:
 			J=E
 			if not L:
@@ -277,7 +276,7 @@ while E:
 			while AI:
 				A.clear();A.draw_text(10,20,'Welcome to Minecraft in TI');A.draw_text(10,40,'Press clear to go back');A.draw_text(10,60,'Use the arrows to move');A.draw_text(10,80,'Toolbox:');A.draw_text(10,100,'0: tp(enter coodrinate and press enter');A.draw_text(10,120,'2: change time(night/day)');A.draw_text(10,140,'Enter for next page');g=E;o=E;Ac=O.get_key(1)
 				if H==45:break
-				elif H==105:A.clear();A.draw_text(10,20,'5: Build:');A.draw_text(10,40,'Arrows to move');A.draw_text(10,60,'0-9 to change block');A.draw_text(10,80,'Enter to build');A.draw_text(10,100,'Clear to stop');A.draw_text(10,120,'Press any key to get back');Ac=O.get_key(1);AI=D;M=1
+				elif H==105:A.clear();A.draw_text(10,20,'1: Build:');A.draw_text(10,40,'Arrows to move');A.draw_text(10,60,'0-9 to build');A.draw_text(10,80,'Clear to stop');A.draw_text(10,100,'Press any key to get back');Ac=O.get_key(1);AI=D;M=1
 		else:
 			A.clear();V=Y.randint(0,8)
 			for S in F(0,320,16):
@@ -333,7 +332,7 @@ while m:
 			else:
 				for AJ in A3:
 					if H==AJ:B[C[2][0]][C[2][1]][C[1]]=A3.index(AJ);R(K,L,B[C[2][0]][C[2][1]][C[1]])
-	elif H==102:J=AZ();B=v(J);B=B;x(B)
+	elif H==102:J=AZ();B=v(J);x(B)
 	elif H==93:
 		if Q==q:Q=p
 		else:Q=q

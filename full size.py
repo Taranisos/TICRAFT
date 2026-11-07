@@ -10,6 +10,7 @@ world_border = False
 key_list=[102,92,93,94,82,83,84,72,73,74]
 menu_select = 1
 draw_menu = True
+draw_sea = True
 
 
 
@@ -22,8 +23,13 @@ s=light_sky #sky
 white=(255,255,255)
 
 
+#menu background
 
-
+sea_a = 9999999881
+sea_b = 9999999988
+sea_c = 9999999998
+sea_d = 9999988812
+sea = [9888812222,9998881222,9999881222,9999988122,9999998812,sea_a,sea_a,sea_b,sea_b,sea_b,sea_c,sea_c,sea_c,sea_b,sea_a,9999998881,sea_d,sea_d,9999888122,9988812222]
 
 
 
@@ -90,23 +96,22 @@ def trans_for_use(player_x = None):
         player_x = world[0]
     use_world.append(player_x)
     chunk_to_load = math.floor((player_x+499)/20)
-    if abs(player_x + 401) > 5:
-        if player_x -(chunk_to_load*20-499) < 10 or chunk_to_load == 49:
-            load_previous_chunk = True
-        world_to_load = math.floor(chunk_to_load/5)
-        world_name = "MCWD"
-        world_name += str(world_to_load)
-        use_world.append(chunk_to_load)
-        world = can_load_world(world_name)
-        chunk1 = check_and_load_chunk(chunk_to_load)
-        if not load_previous_chunk:
-            load_next_chunk = True
-        if load_next_chunk:
-            use_world.append(chunk_to_load+1)
-            chunk2 = check_and_load_chunk(chunk_to_load+1)
-        elif load_previous_chunk:
-            use_world.append(chunk_to_load-1)
-            chunk2 = check_and_load_chunk(chunk_to_load-1)
+    if player_x -(chunk_to_load*20-499) < 10 or chunk_to_load == 49:
+        load_previous_chunk = True
+    world_to_load = math.floor(chunk_to_load/5)
+    world_name = "MCWD"
+    world_name += str(world_to_load)
+    use_world.append(chunk_to_load)
+    world = can_load_world(world_name)
+    chunk1 = check_and_load_chunk(chunk_to_load)
+    if not load_previous_chunk:
+        load_next_chunk = True
+    if load_next_chunk:
+        use_world.append(chunk_to_load+1)
+        chunk2 = check_and_load_chunk(chunk_to_load+1)
+    elif load_previous_chunk:
+        use_world.append(chunk_to_load-1)
+        chunk2 = check_and_load_chunk(chunk_to_load-1)
         
     if warning:
         print("Console: Info: world loaded succesfully!")
@@ -363,14 +368,14 @@ def update_rects(world, dir):
         else:
             check = player_x+499+x - (world[2]*20)
             chunk_to_use = 4
-            if border_2 < check:
+            if check == 0 or check == border_2:
+                use_next = True
+                use = 3
+            elif border_2 < check:
                 chunk_to_use = 3
                 use_next = True
                 use = 4
                 check = 0
-            elif check == 0 or check == border_2:
-                use_next = True
-                use = 3
         for block in world[chunk_to_use][check]:
             draw = True
             if not use_next:
@@ -430,6 +435,14 @@ def draw_cursor(x,y):
     ti_draw.fill_rect(x,y+10,3,5)
     ti_draw.fill_rect(x+10,y+14,5,3)
     ti_draw.fill_rect(x+14,y+10,3,7)
+
+
+def draw_menu_background(sea):
+    for x in range(0,305,16):
+        row = sea[int(x/16)]
+        for y in range(30,175,16):
+            row = str(row)
+            draw_single_block(x,y,int(row[int(y/16)-1]))
 
 
 def update_menu(menu_select, prev):
@@ -524,8 +537,8 @@ player_x = world[0]
 #Start!
 while True:
     if draw_menu:
-        #draw_big_water(-1,-1,water)
-        #draw_big_water(159,-1,water)
+        if draw_sea:
+            draw_menu_background(sea)
         ti_draw.set_color(*dark_sky)
         ti_draw.fill_rect(-1,158,321,52)
         ti_draw.set_color(*white)
@@ -539,6 +552,7 @@ while True:
         ti_draw.draw_text(140,196,"Play")
         ti_draw.draw_text(218,196,"Nothing")
         draw_menu = False
+        draw_sea = False
     k = ti_system.get_key(1)
     if k == 45:
         break
@@ -550,7 +564,6 @@ while True:
         elif menu_select == 0:
             menu_wait = True
             while menu_wait:
-                draw_menu = True
                 ti_draw.clear()
                 ti_draw.draw_text(10,20,"Welcome to Minecraft in TI")
                 ti_draw.draw_text(10,40,"Press clear to go back")
@@ -559,17 +572,18 @@ while True:
                 ti_draw.draw_text(10,100,"0: tp(enter coodrinate and press enter")
                 ti_draw.draw_text(10,120,"2: change time(night/day)")
                 ti_draw.draw_text(10,140,"Enter for next page")
+                draw_menu = True
+                draw_sea = True
                 waitkey = ti_system.get_key(1)
                 if k == 45:
                     break
                 elif k == 105:
                     ti_draw.clear()
-                    ti_draw.draw_text(10,20,"5: Build:")
+                    ti_draw.draw_text(10,20,"1: Build:")
                     ti_draw.draw_text(10,40,"Arrows to move")
-                    ti_draw.draw_text(10,60, "0-9 to change block")
-                    ti_draw.draw_text(10,80,"Enter to build")
-                    ti_draw.draw_text(10,100,"Clear to stop")
-                    ti_draw.draw_text(10,120,"Press any key to get back")
+                    ti_draw.draw_text(10,60, "0-9 to build")
+                    ti_draw.draw_text(10,80,"Clear to stop")
+                    ti_draw.draw_text(10,100,"Press any key to get back")
                     waitkey = ti_system.get_key(1)
                     menu_wait = False
                     menu_select = 1
@@ -596,6 +610,7 @@ while True:
                         draw_glass(x,y)
                     else:
                         draw_water(x,y)
+            draw_menu = True
             nothing = ti_system.get_key(1)
             menu_select = 1
             nothing = None
@@ -713,7 +728,6 @@ while game:
     elif k == 102:
         player_x = tp()
         world = trans_for_use(player_x)
-        world = world
         draw_rects(world) 
     elif k == 93:
         if s == light_sky:
