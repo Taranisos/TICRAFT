@@ -15,7 +15,7 @@ Graphics modes:
 Textures from Minecraft.
 
 Know issues:
-At 20 blocks from the right world border, at the barrier between chunks 0 and 1, blocks can get deleted and won't render correctly.
-It's slow.
+-At the barrier between chunks 0 and 1, blocks won't render correctly if going right.
+-It's slow.
 
 Have fun!
